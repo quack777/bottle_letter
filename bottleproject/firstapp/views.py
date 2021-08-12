@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Letter
-import random
+import random as rd 
 # Create your views here.
 
 def home(request):
     letters = Letter.objects.all()
-    max=len(letters)
-    letters.id = random.randrange(1,max+1)
+    max=int(len(letters))+1
+    letters.id = rd.randrange(1, max)
     return render(request,'home.html',{'letters':letters})
 
 def write(request):
@@ -26,5 +26,5 @@ def read(request,id):
 def update(request):
     letters = Letter.objects.all()
     max=len(letters)
-    letters.id = random.randrange(1,max+1)
+    letters.id = rd.randrange(1,max+1)
     return redirect('read',letters.id)
